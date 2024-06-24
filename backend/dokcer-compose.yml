@@ -1,0 +1,27 @@
+version: '3'
+services:
+  frontend:
+    image: node:14
+    working_dir: /app
+    volumes:
+      - ./frontend/my-beautiful-shop-frontend:/app
+    command: bash -c "npm install && npm start"
+    ports:
+      - "4200:4200"
+
+  backend:
+    build: .
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:4.2
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/db:/data/db
