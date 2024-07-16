@@ -1,0 +1,5 @@
+use my_beautiful_shop
+show collections
+db.orders.find().pretty()db.order_payments.find().pretty()db.outstanding.find().pretty()
+db.orders.find().pretty()
+db.sellers.find().pretty()
