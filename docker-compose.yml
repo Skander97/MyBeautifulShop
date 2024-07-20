@@ -2,7 +2,7 @@ version: '3'
 services:
   backend:
     build:
-      context: .
+      context: ./backend
       dockerfile: Dockerfile
     working_dir: /app
     volumes:
@@ -20,3 +20,12 @@ services:
       - "27017:27017"
     volumes:
       - ./data/db:/data/db
+
+  my-beautiful-shop-frontend:
+    build:
+      context: ./my-beautiful-shop-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:80"
+    depends_on:
+      - backend
