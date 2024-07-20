@@ -1,0 +1,10 @@
+/* src/components/Sales/Sales.css */
+.sales-dashboard .card {
+    margin-bottom: 20px;
+}
+.sales-dashboard .card-title {
+    font-size: 1.25rem;
+}
+.sales-dashboard .text-center {
+    text-align: center;
+}
