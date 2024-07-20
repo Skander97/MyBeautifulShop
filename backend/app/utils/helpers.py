@@ -1,14 +1,21 @@
-# utils/helpers.py
+import json
 from bson import ObjectId
 
-def json_serializable(doc):
-    """
-    Convert MongoDB document to a JSON-serializable dictionary.
-    """
-    if isinstance(doc, list):
-        return [json_serializable(d) for d in doc]
-    if isinstance(doc, dict):
-        return {k: json_serializable(v) for k, v in doc.items()}
-    if isinstance(doc, ObjectId):
-        return str(doc)
-    return doc
+def json_serializable(data):
+    if isinstance(data, list):
+        for item in data:
+            item = convert_objectid(item)
+    elif isinstance(data, dict):
+        data = convert_objectid(data)
+    return data
+
+def convert_objectid(item):
+    if isinstance(item, dict):
+        for key, value in item.items():
+            if isinstance(value, ObjectId):
+                item[key] = str(value)
+            elif isinstance(value, (list, dict)):
+                item[key] = json_serializable(value)
+    elif isinstance(item, list):
+        item = [convert_objectid(i) for i in item]
+    return item
