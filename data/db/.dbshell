@@ -3,3 +3,6 @@ show collections
 db.orders.find().pretty()db.order_payments.find().pretty()db.outstanding.find().pretty()
 db.orders.find().pretty()
 db.sellers.find().pretty()
+use my_beautiful_shop;db.orders.find({ "order_purchase_timestamp": { $type: "date" } }).limit(5).pretty();
+use my_beautiful_shop;
+db.orders.find({ "order_purchase_timestamp": { $type: "date" } }).limit(5).pretty();
